@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- This network was created in GeNIe Academic, which can be used for educational and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="TimeOfDay">
+			<state id="State0" />
+			<state id="State1" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="FootballGame">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>TimeOfDay</parents>
+			<probabilities>0 1 0 1</probabilities>
+		</cpt>
+		<cpt id="Bar">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>TimeOfDay</parents>
+			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Sobriety">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>FootballGame Bar</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Transportation">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>Sobriety</parents>
+			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Neighbourhood">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>FootballGame Transportation</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="Company">
+			<state id="State0" />
+			<state id="State1" />
+			<parents>Bar FootballGame</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="MMA">
+			<state id="True" />
+			<state id="False" />
+			<parents>Neighbourhood Sobriety Company Transportation</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.4.4601.0 ACADEMIC" name="Network1" faultnameformat="nodestate">
+			<node id="MMA">
+				<name>MMA</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>415 487 463 517</position>
+			</node>
+			<node id="Neighbourhood">
+				<name>Neighbourhood</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>180 367 282 407</position>
+			</node>
+			<node id="FootballGame">
+				<name>FootballGame</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>176 134 295 169</position>
+			</node>
+			<node id="Sobriety">
+				<name>Sobriety</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>276 229 354 277</position>
+			</node>
+			<node id="TimeOfDay">
+				<name>TimeOfDay</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>345 27 459 63</position>
+			</node>
+			<node id="Company">
+				<name>Company</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>608 230 702 262</position>
+			</node>
+			<node id="Bar">
+				<name>Bar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>557 131 610 160</position>
+			</node>
+			<node id="Transportation">
+				<name>Transportation</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>442 273 549 311</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
