@@ -3,61 +3,63 @@
 <smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
 	<nodes>
 		<cpt id="TimeOfDay">
-			<state id="State0" />
-			<state id="State1" />
-			<probabilities>0.5 0.5</probabilities>
+			<state id="Day" />
+			<state id="Evening" />
+			<state id="Night" />
+			<probabilities>0.3 0.4000000000000001 0.2999999999999998</probabilities>
 		</cpt>
 		<cpt id="FootballGame">
-			<state id="State0" />
-			<state id="State1" />
+			<state id="Game" />
+			<state id="NoGame" />
 			<parents>TimeOfDay</parents>
-			<probabilities>0 1 0 1</probabilities>
+			<probabilities>0.2 0.8 0.6 0.4 0.1 0.9</probabilities>
 		</cpt>
 		<cpt id="Bar">
-			<state id="State0" />
-			<state id="State1" />
+			<state id="Bar" />
+			<state id="NoBar" />
 			<parents>TimeOfDay</parents>
-			<probabilities>0.5 0.5 0.5 0.5</probabilities>
+			<probabilities>0.2 0.8 0.9 0.09999999999999998 0.5 0.5</probabilities>
 		</cpt>
 		<cpt id="Sobriety">
-			<state id="State0" />
-			<state id="State1" />
+			<state id="Sober" />
+			<state id="Drunk" />
 			<parents>FootballGame Bar</parents>
-			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
-		</cpt>
-		<cpt id="Transportation">
-			<state id="State0" />
-			<state id="State1" />
-			<parents>Sobriety</parents>
-			<probabilities>0.5 0.5 0.5 0.5</probabilities>
-		</cpt>
-		<cpt id="Neighbourhood">
-			<state id="State0" />
-			<state id="State1" />
-			<parents>FootballGame Transportation</parents>
-			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+			<probabilities>0.1 0.9 0.6 0.4 0.3 0.7 0.9 0.1</probabilities>
 		</cpt>
 		<cpt id="Company">
-			<state id="State0" />
-			<state id="State1" />
+			<state id="Alone" />
+			<state id="WithFriends" />
 			<parents>Bar FootballGame</parents>
-			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+			<probabilities>0.9 0.1 0.4 0.6 0.5 0.5 0.8 0.2</probabilities>
 		</cpt>
-		<cpt id="MMA">
+		<cpt id="Transportation">
+			<state id="OnFoot" />
+			<state id="PublicTransport" />
+			<state id="Ridesharing" />
+			<parents>Sobriety Company</parents>
+			<probabilities>0.1 0.8 0.1 0.2 0.6 0.2 0.3 0.6 0.1 0.3 0.2 0.5</probabilities>
+		</cpt>
+		<cpt id="Neighbourhood">
+			<state id="Safe" />
+			<state id="Dangerous" />
+			<parents>FootballGame Transportation</parents>
+			<probabilities>0.1 0.9 0.3 0.7 0.8 0.2 0.5 0.5 0.8 0.2 0.9 0.1</probabilities>
+		</cpt>
+		<cpt id="RiskOfMMA">
 			<state id="True" />
 			<state id="False" />
-			<parents>Neighbourhood Sobriety Company Transportation</parents>
-			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+			<parents>Neighbourhood Sobriety Company</parents>
+			<probabilities>0.2 0.8 0.1 0.9 0.4 0.6 0.2 0.8 0.8 0.2 0.5 0.5 0.9 0.09999999999999998 0.6 0.4</probabilities>
 		</cpt>
 	</nodes>
 	<extensions>
 		<genie version="1.0" app="GeNIe 2.4.4601.0 ACADEMIC" name="Network1" faultnameformat="nodestate">
-			<node id="MMA">
-				<name>MMA</name>
+			<node id="RiskOfMMA">
+				<name>RiskOfMMA</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>415 487 463 517</position>
+				<position>415 487 515 520</position>
 			</node>
 			<node id="Neighbourhood">
 				<name>Neighbourhood</name>
@@ -78,7 +80,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>276 229 354 277</position>
+				<position>281 229 359 277</position>
 			</node>
 			<node id="TimeOfDay">
 				<name>TimeOfDay</name>
@@ -99,14 +101,14 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>557 131 610 160</position>
+				<position>575 110 628 139</position>
 			</node>
 			<node id="Transportation">
 				<name>Transportation</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>442 273 549 311</position>
+				<position>415 295 522 333</position>
 			</node>
 		</genie>
 	</extensions>
