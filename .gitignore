@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Pysmile and pysmile license
+src/pysmile.pyd
+src/pysmile_license.py
