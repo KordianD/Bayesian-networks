@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen, SwapTransition
-from mma import net_setup, get_all_posteriors, change_evidence_and_update, print_all_posteriors
+from mma import net_setup, get_result, get_all_posteriors, change_evidence_and_update, print_all_posteriors
 from utils import split, get_offsets
 from ui import WrappedButton
 from functools import partial
@@ -20,7 +20,7 @@ class QuestionsScreen(Screen):
         self.floater = FloatLayout()
         self.result = None
         self.data = get_all_posteriors(net)
-
+        self.button_answers = {}
         self.apply_nodes_to_labels()
 
         self.add_widget(self.floater)
@@ -52,6 +52,7 @@ class QuestionsScreen(Screen):
                 self.apply_result_floater()
 
     def apply_buttons_to_floater(self, node, x_offset, y_offset):
+        self.button_answers[node] = {}
         for idx, answer in enumerate(self.data[node].keys()):
             button = WrappedButton(
                 text=answer,
@@ -63,6 +64,7 @@ class QuestionsScreen(Screen):
             button_callback = partial(self.answer_the_question, node)
             button.bind(on_press=button_callback)
             self.floater.add_widget(button)
+            self.button_answers[node][answer] = button
 
     def apply_result_floater(self):
         self.result = Label(
@@ -76,12 +78,22 @@ class QuestionsScreen(Screen):
         self.floater.add_widget(self.result)
 
     def answer_the_question(self, question, instance):
-        change_evidence_and_update(net, question, instance.text)
+        checked = self.button_answers[question][instance.text].checked
+        answer = None if checked else instance.text
+        change_evidence_and_update(net, question, answer)
         print_all_posteriors(net)
-        # to implement
-        self.result.text = '1 %'
+        self.result.text = f'{int(get_result(net) * 100)} %'
 
-class ChooseTechnologyApp(App):
+        for button_name in self.button_answers[question]:
+            self.button_answers[question][button_name].color = [1, 1, 1, 1]
+            self.button_answers[question][button_name].checked = False
+
+        if not checked:
+            self.button_answers[question][instance.text].color = [40, 100, 30, 1]
+            self.button_answers[question][instance.text].checked = True
+
+
+class MMAApp(App):
 
     def build(self):
         sm.add_widget(QuestionsScreen(name="questions"))
@@ -89,4 +101,4 @@ class ChooseTechnologyApp(App):
 
 
 if __name__ == '__main__':
-    ChooseTechnologyApp().run()
+    MMAApp().run()

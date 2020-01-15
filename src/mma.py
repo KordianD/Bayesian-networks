@@ -3,6 +3,9 @@ import pysmile
 import pysmile_license
 
 
+result_node_name = 'RiskOfMMA'
+
+
 def net_setup():
     net = pysmile.Network()
     net.read_file("mma.xdsl")
@@ -26,6 +29,10 @@ def get_all_posteriors(net):
     for handle in net.get_all_nodes():
         get_posteriors(net, handle, posteriors_dict)
     return posteriors_dict
+
+
+def get_result(net):
+    return net.get_node_value(result_node_name)[0]
 
 
 def change_evidence_and_update(net, node_id, outcome_id):
